@@ -1,8 +1,29 @@
 <?php
-
+  session_start();
 require_once 'header.php';
 require_once 'footer.php';
-require_once 'menuConnect.php'
+require_once 'menuConnect.php';
+
+if(isset($_POST['btn'])){
+
+  if(isset($_POST['email'])){
+  @$email = $_POST['email'];
+  $_SESSION['email']=$email;
+
+  }else{
+  $erreurMail= "<p>Email incorrect</p>";
+  }
+
+  if(empty($_POST['password'])){
+  @$password = $_POST['password'];
+  $_SESSION['password']=$password;
+
+  }else{
+    $erreurPassword= "<p>Mot de passe incorrect<p>";
+  }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +35,18 @@ require_once 'menuConnect.php'
     <title>Connexion</title>
 </head>
 <body>
-<form>
+<form action="#" method="POST"> 
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer email">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Entrer email">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Mots de passe</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mots de passe">
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Mots de passe">
   </div>
-  <button type="submit" class="btn btn-primary">Connexion</button>
+  <button type="submit" class="btn btn-primary" name="btn">Connexion</button>
 </form>
-  
+
 </body>
 <style>
 
@@ -38,5 +59,10 @@ button{
 
     margin-left:20px;
 }
-<style>
+
+<?php  
+echo $erreurMail; 
+echo $erreurPassword;
+?>
+</style>
 </html>
